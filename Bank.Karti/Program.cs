@@ -1,5 +1,8 @@
 ﻿
 using System;
+using System.Threading.Channels;
+using System.Transactions;
+
 namespace Bank.Karti
 {
     class DebitCard
@@ -27,6 +30,16 @@ namespace Bank.Karti
     {
         public static void Main(string[] args)
         {
+            string user = "Zilish ZUlfugarli";
+            Console.WriteLine("Enter Name and Surname:");
+            string name = Console.ReadLine();
+            if (name == "Zilish Zulfugarli") Console.WriteLine("Dear " +  name  + " Welcome to Kapital Bank");
+            else
+            {
+                Console.WriteLine("Wrong Information");
+                return;
+            }
+
             DebitCard card = new DebitCard();
             card.CardNumber = "4169 - 7388 - 1111 - 1111";
             card.CardCVV = "111";
@@ -35,11 +48,32 @@ namespace Bank.Karti
             card.PersonSurname = "Zulfugarli";
             card.CompanyName = "Kapital Bank";
             card.IncreaseBalance(200);
+            
             Console.WriteLine(card.CardNumber);
             Console.WriteLine(card.CardCVV);
             Console.WriteLine(card.ExpirationDate);
             Console.WriteLine(card.PersonName);
             Console.WriteLine(card.CompanyName);
+            Console.WriteLine("Your balane is " + card.Balance + " AZN");
+
+            Console.WriteLine("Enter your pin for check money:");
+            int pin = Convert.ToInt32(Console.ReadLine());
+            
+            if (pin == 1111)
+            {
+                Console.WriteLine("You can check money");
+            }
+            else
+            {
+                Console.WriteLine("Wrong information");
+                return;
+
+            }
+            
         }
+
+        
     }
 }
+
+
