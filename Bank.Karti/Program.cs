@@ -13,7 +13,7 @@ namespace Bank.Karti
         public string PersonName { get; set; }
         public string PersonSurname { get; set; }
         public string CompanyName { get; set; }
-        public decimal Balance { get; private set; }
+        public decimal Balance { get; set; }
         public void IncreaseBalance(decimal sum)
         { if (sum <= 0) return;
             Balance += sum;
@@ -54,13 +54,14 @@ namespace Bank.Karti
             Console.WriteLine(card.ExpirationDate);
             Console.WriteLine(card.PersonName);
             Console.WriteLine(card.CompanyName);
-            Console.WriteLine("Your balane is " + card.Balance + " AZN");
 
             Console.WriteLine("Enter your pin for check money:");
             int pin = Convert.ToInt32(Console.ReadLine());
             
             if (pin == 1111)
             {
+                Console.WriteLine("Your balane is " + card.Balance + " AZN");
+
                 Console.WriteLine("You can check money");
             }
             else
@@ -69,7 +70,20 @@ namespace Bank.Karti
                 return;
 
             }
-            
+            Console.WriteLine("How much money you wnat to check:");
+            int sum = Convert.ToInt32(Console.ReadLine());
+            if (sum >= 0 && sum <= card.Balance) Console.WriteLine("Waiting ... " + " Your money prepared by system");
+
+
+            else
+            {
+                Console.WriteLine("There isn't enough money in your Balance");
+            }
+            if (sum >= 0 && sum <= card.Balance)
+            {
+                card.Balance -= sum;
+            }
+            Console.WriteLine("Your current balance is:" + card.Balance);
         }
 
         
